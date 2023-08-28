@@ -9,17 +9,17 @@
 /**
  * Returns the result of concatenation of two strings.
  *
- * @param {string} value1
- * @param {string} value2
  * @return {string}
  *
  * @example
  *   'aa', 'bb' => 'aabb'
  *   'aa',''    => 'aa'
  *   '',  'bb'  => 'bb'
+ * @param str1
+ * @param str2
  */
-function concatenateStrings(/* value1, value2 */) {
-  throw new Error('Not implemented');
+function concatenateStrings(str1, str2) {
+  return str1 + str2;
 }
 
 
@@ -34,8 +34,8 @@ function concatenateStrings(/* value1, value2 */) {
  *   'b'     => 1
  *   ''      => 0
  */
-function getStringLength(/* value */) {
-  throw new Error('Not implemented');
+function getStringLength(value) {
+  return value.length;
 }
 
 /**
@@ -51,8 +51,8 @@ function getStringLength(/* value */) {
  *   'John','Doe'      => 'Hello, John Doe!'
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
-  throw new Error('Not implemented');
+function getStringFromTemplate(firstName, lastName) {
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -65,8 +65,8 @@ function getStringFromTemplate(/* firstName, lastName */) {
  *   'Hello, John Doe!' => 'John Doe'
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  return value.match(/[a-z]*,\s([^!]*)/im)[1];
 }
 
 
@@ -80,8 +80,8 @@ function extractNameFromTemplate(/* value */) {
  *   'John Doe'  => 'J'
  *   'cat'       => 'c'
  */
-function getFirstChar(/* value */) {
-  throw new Error('Not implemented');
+function getFirstChar(value) {
+  return value[0];
 }
 
 /**
@@ -95,23 +95,28 @@ function getFirstChar(/* value */) {
  *   'cat'              => 'cat'
  *   '\tHello, World! ' => 'Hello, World!'
  */
-function removeLeadingAndTrailingWhitespaces(/* value */) {
-  throw new Error('Not implemented');
+function removeLeadingAndTrailingWhitespaces(value) {
+  return value.trim();
 }
 
 /**
  * Returns a string that repeated the specified number of times.
  *
  * @param {string} value
- * @param {string} count
+ * @param {number} count
  * @return {string}
  *
  * @example
  *   'A', 5  => 'AAAAA'
  *   'cat', 3 => 'catcatcat'
  */
-function repeatString(/* value, count */) {
-  throw new Error('Not implemented');
+function repeatString(value, count) {
+  let newStr = '';
+  // eslint-disable-next-line no-plusplus
+  for (let i = 1; i <= count; i++) {
+    newStr += value;
+  }
+  return newStr;
 }
 
 /**
@@ -126,8 +131,9 @@ function repeatString(/* value, count */) {
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  const re = new RegExp(`${value}`, 'i');
+  return str.replace(re, '');
 }
 
 /**
@@ -141,10 +147,9 @@ function removeFirstOccurrences(/* str, value */) {
  *   '<span>' => 'span'
  *   '<a>' => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(str) {
+  return str.replace(/[<>]/g, '').trim();
 }
-
 
 /**
  * Converts all characters of the specified string into the upper case
@@ -156,8 +161,8 @@ function unbracketTag(/* str */) {
  *   'Thunderstruck' => 'THUNDERSTRUCK'
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
-function convertToUpperCase(/* str */) {
-  throw new Error('Not implemented');
+function convertToUpperCase(str) {
+  return str.toUpperCase();
 }
 
 /**
@@ -175,8 +180,8 @@ function convertToUpperCase(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  str.split(';');
 }
 
 /**
@@ -202,8 +207,46 @@ function extractEmails(/* str */) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  let graphicRectangle = '';
+  // eslint-disable-next-line no-plusplus
+  for (let i = 1; i <= height; i++) {
+    if (i === 1) {
+      // eslint-disable-next-line no-plusplus
+      for (let w = 1; w <= width; w++) {
+        if (w === 1) {
+          graphicRectangle += '┌';
+        } else if (w === width) {
+          graphicRectangle += '┐\n';
+        } else {
+          graphicRectangle += '─';
+        }
+      }
+    } else if (i === height) {
+      // eslint-disable-next-line no-plusplus
+      for (let w = 1; w <= width; w++) {
+        if (w === 1) {
+          graphicRectangle += '└';
+        } else if (w === width) {
+          graphicRectangle += '┘\n';
+        } else {
+          graphicRectangle += '─';
+        }
+      }
+    } else {
+      // eslint-disable-next-line no-plusplus
+      for (let w = 1; w <= width; w++) {
+        if (w === 1) {
+          graphicRectangle += '│';
+        } else if (w === width) {
+          graphicRectangle += '│\n';
+        } else {
+          graphicRectangle += ' ';
+        }
+      }
+    }
+  }
+  return graphicRectangle;
 }
 
 
@@ -223,8 +266,21 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  let newStr = '';
+  // const matchReg = new RegExp('[a-m]*', 'gim');
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < str.length; i++) {
+    const code = str.charCodeAt(i);
+    if ((code >= 65 && code <= 77) || (code >= 97 && code <= 109)) {
+      newStr += String.fromCharCode(code + 13);
+    } else if ((code >= 78 && code <= 90) || (code >= 110 && code <= 122)) {
+      newStr += String.fromCharCode(code - 13);
+    } else {
+      newStr += str[i];
+    }
+  }
+  return newStr;
 }
 
 /**
@@ -240,8 +296,15 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  if (typeof value === 'string') {
+    return true;
+  }
+  if (typeof value === 'object' && value) {
+    const newString = Object.values(value).join('');
+    return typeof newString === 'string';
+  }
+  return false;
 }
 
 
