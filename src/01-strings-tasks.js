@@ -297,14 +297,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-  if (typeof value === 'string') {
-    return true;
-  }
-  if (typeof value === 'object' && value) {
-    const newString = Object.values(value).join('');
-    return typeof newString === 'string';
-  }
-  return false;
+  return typeof value === 'string' || value instanceof String;
 }
 
 
