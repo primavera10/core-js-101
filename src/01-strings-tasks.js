@@ -181,7 +181,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-  str.split(';');
+  return str.split(';');
 }
 
 /**
@@ -325,8 +325,41 @@ function isString(value) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const cardRealNumber = {
+    A: 0,
+    2: 1,
+    3: 2,
+    4: 3,
+    5: 4,
+    6: 5,
+    7: 6,
+    8: 7,
+    9: 8,
+    10: 9,
+    J: 10,
+    Q: 11,
+    K: 12,
+  };
+  let cardNumber = '';
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < value.length; i++) {
+    if (i !== value.length - 1) {
+      cardNumber += value[i];
+    }
+  }
+  if (value.endsWith('♣')) {
+    return cardRealNumber[cardNumber] + 0;
+  }
+  if (value.endsWith('♦')) {
+    return cardRealNumber[cardNumber] + 13;
+  }
+  if (value.endsWith('♥')) {
+    return cardRealNumber[cardNumber] + 26;
+  }
+  if (value.endsWith('♠')) {
+    return cardRealNumber[cardNumber] + 39;
+  }
 }
 
 
