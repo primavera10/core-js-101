@@ -247,12 +247,11 @@ function toArrayOfSquares(arr) {
  */
 function getMovingSum(arr) {
   let movingSum = 0;
-  const newArr = [];
-  for (let i = 0; i < arr.length; i += 1) {
-    newArr.push(arr[i] + movingSum);
-    movingSum += arr[i];
-  }
-  return newArr;
+  return arr.map((el) => {
+    const newEl = el + movingSum;
+    movingSum += el;
+    return newEl;
+  });
 }
 
 /**
