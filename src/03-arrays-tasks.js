@@ -286,11 +286,8 @@ function getSecondItems(arr) {
  */
 function propagateItemsByPositionIndex(arr) {
   return arr.flatMap((el, index) => {
-    const newArr = [];
-    for (let i = 0; i < index + 1; i += 1) {
-      newArr.push(el);
-    }
-    return newArr;
+    const arr1 = new Array(index + 1);
+    return arr1.fill(el, 0);
   });
 }
 
@@ -336,13 +333,16 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-  let num = 0;
-  for (let i = 0; i < arr.length; i += 1) {
-    if (arr[i] > 0 && typeof arr[i] === 'number') {
-      num += 1;
+  return arr.filter((el) => {
+    if (typeof el === 'number' && el > 0) {
+      return el;
     }
-  }
-  return num;
+  }).length;
+  // return arr.reduce((acc, curr) => {
+  //   if (typeof curr === 'number' && curr > 0) {
+  //     return acc + 1;
+  //   }
+  // }, 0);
 }
 
 /**
@@ -412,13 +412,7 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-  const arr1 = [];
-  for (let i = 0; i < arr.length; i += 1) {
-    if (!arr[i]) {
-      arr1.push(arr[i]);
-    }
-  }
-  return arr1.length;
+  return arr.filter((el) => !el).length;
 }
 
 /**
@@ -499,6 +493,7 @@ function sortCitiesArray(arr) {
       }
       return -1;
     }
+    return 0;
   });
 }
 
@@ -521,19 +516,26 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  const identityMatrix = [];
-  for (let i = 0; i < n; i += 1) {
-    const arr = [];
-    for (let j = 0; j < n; j += 1) {
-      if (j === i) {
-        arr.push(1);
-      } else {
-        arr.push(0);
-      }
-    }
-    identityMatrix.push(arr);
-  }
-  return identityMatrix;
+  // const identityMatrix = [];
+  // for (let i = 0; i < n; i += 1) {
+  //   const arr = [];
+  //   for (let j = 0; j < n; j += 1) {
+  //     if (j === i) {
+  //       arr.push(1);
+  //     } else {
+  //       arr.push(0);
+  //     }
+  //   }
+  //   identityMatrix.push(arr);
+  // }
+  // return identityMatrix;
+  const identityMatrix = Array.from({ length: n });
+  return identityMatrix.map((el, index) => {
+    const arr = new Array(n);
+    arr.fill(0, 0);
+    arr.fill(1, index, index + 1);
+    return arr;
+  });
 }
 
 /**
@@ -550,11 +552,8 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-  const arr = [];
-  for (let i = start; i <= end; i += 1) {
-    arr.push(i);
-  }
-  return arr;
+  const length = end - start + 1;
+  return Array.from({ length }, (el, index) => start + index);
 }
 
 /**
