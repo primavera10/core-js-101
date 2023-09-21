@@ -516,19 +516,6 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  // const identityMatrix = [];
-  // for (let i = 0; i < n; i += 1) {
-  //   const arr = [];
-  //   for (let j = 0; j < n; j += 1) {
-  //     if (j === i) {
-  //       arr.push(1);
-  //     } else {
-  //       arr.push(0);
-  //     }
-  //   }
-  //   identityMatrix.push(arr);
-  // }
-  // return identityMatrix;
   const identityMatrix = Array.from({ length: n });
   return identityMatrix.map((el, index) => {
     const arr = new Array(n);
@@ -568,13 +555,8 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-  const newArr = [];
-  for (let i = 0; i < arr.length; i += 1) {
-    if (!newArr.includes(arr[i])) {
-      newArr.push(arr[i]);
-    }
-  }
-  return newArr;
+  const set = new Set(arr);
+  return [...set];
 }
 
 /**
@@ -609,18 +591,16 @@ function distinct(arr) {
  */
 function group(array, keySelector, valueSelector) {
   const map = new Map();
-  for (let i = 0; i < array.length; i += 1) {
-    const key = keySelector(array[i]);
-    const value = valueSelector(array[i]);
-    if (!map.has(key)) {
-      map.set(key, [value]);
+  return array.reduce((acc, curr) => {
+    if (acc.has(keySelector(curr))) {
+      const newArr = acc.get(keySelector(curr));
+      newArr.push(valueSelector(curr));
+      acc.set(keySelector(curr), newArr);
     } else {
-      const cityArray = map.get(key);
-      cityArray.push(value);
-      map.set(key, cityArray);
+      acc.set(keySelector(curr), [valueSelector(curr)]);
     }
-  }
-  return map;
+    return acc;
+  }, map);
 }
 
 
@@ -655,11 +635,7 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-  let current = arr;
-  for (let i = 0; i < indexes.length; i += 1) {
-    current = current[indexes[i]];
-  }
-  return current;
+  return indexes.reduce((acc, curr) => acc[curr], arr);
 }
 
 
