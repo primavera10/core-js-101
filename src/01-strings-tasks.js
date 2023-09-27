@@ -357,9 +357,7 @@ function getCardId(value) {
   if (value.endsWith('♥')) {
     return cardRealNumber[cardNumber] + 26;
   }
-  if (value.endsWith('♠')) {
-    return cardRealNumber[cardNumber] + 39;
-  }
+  return cardRealNumber[cardNumber] + 39;
 }
 
 

@@ -536,7 +536,8 @@ describe('04-conditions-n-loops-tasks', () => {
       [X, O, O],
       [X, X, O],
       [O, X, X],
-    ], [
+    ],
+    [
       [O, O, X],
       [X, X, O],
       [X, undefined, O],

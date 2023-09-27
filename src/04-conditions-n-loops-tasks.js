@@ -566,8 +566,56 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  function checkRow(row, col, current) {
+    for (let i = 0; i < 3; i += 1) {
+      if (i !== col) {
+        if (position[row][i] !== current || position[row][i] === undefined) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  function checkCol(row, col, current) {
+    for (let i = 0; i < 3; i += 1) {
+      if (i !== row) {
+        if (position[i][col] !== current || position[i][col] === undefined) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  function checkLeftDiagonal(current) {
+    return position[0][2] === current
+      && position[1][1] === current
+      && position[2][0] === current
+      && current !== undefined;
+  }
+
+  function checkRightDiagonal(current) {
+    for (let i = 2; i >= 0; i -= 1) {
+      if (position[i][i] !== current || position[i][i] === undefined) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  for (let i = 0; i < position.length; i += 1) {
+    for (let j = 0; j < position[i].length; j += 1) {
+      if (checkRow(i, j, position[i][j])
+        || checkCol(i, j, position[i][j])
+        || checkLeftDiagonal(position[i][j])
+        || checkRightDiagonal(position[i][j])) {
+        return position[i][j];
+      }
+    }
+  }
+  return undefined;
 }
 
 

@@ -333,16 +333,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-  return arr.filter((el) => {
-    if (typeof el === 'number' && el > 0) {
-      return el;
-    }
-  }).length;
-  // return arr.reduce((acc, curr) => {
-  //   if (typeof curr === 'number' && curr > 0) {
-  //     return acc + 1;
-  //   }
-  // }, 0);
+  return arr.filter((el) => typeof el === 'number' && el > 0).length;
 }
 
 /**
